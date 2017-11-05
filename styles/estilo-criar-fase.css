@@ -1,0 +1,141 @@
+body,html{
+  height:100%;
+  width:100%;
+}
+
+#div-modal{
+  margin-top: -41vh;
+}
+
+body{
+  overflow-x: hidden;
+  background-image: url(../imgs/fundos/mago-fugindo.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top right;
+}
+
+#controles{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.imgs-controles{
+  height: 4%;
+  width: 4%;
+  margin-right: 0.5%;
+  padding-left: 0.5%;
+  padding-right: 0.5%;
+  cursor: pointer;
+}
+
+#conteudo-total{
+  width: 100%;
+  height: 80%;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-bottom: 2%;
+  margin-top: 1%;
+}
+
+#div-imgs{
+  display:flex;
+  width: 20%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#conteudo-parcial{
+  display: flex;
+  width:80%;
+  height: 100%;
+  flex-direction: column;
+}
+
+#tiro,#bater{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#tiro,#bater,#img-fundo-fase,#musica-fundo-fase{
+  display: flex;
+  width: 100%;
+  height:25%;
+  border: 2px solid white;
+}
+
+#tiro,#bater,#img-fundo-fase{
+  border-bottom: 0px;
+}
+
+#img-fundo-fase,#musica-fundo-fase{
+    align-items: center;
+    justify-content: space-around;
+}
+
+.imgs-upadas{
+  width: 60%;
+  height:20%;
+}
+
+.urls{
+  width: 100%; // elas ocupam 100% do article, e o article ocupa 90 % da div
+}
+
+.animacoes{
+  width: 100%; // elas ocupam 100% do article, e o article ocupa 17 % da div
+}
+
+h1{
+  font-family: 'Rye', cursive;
+  font-size: 1.5em;
+  line-height: 1.3em;
+  font-weight: normal;
+  color: white;
+  text-align: center;
+}
+.input-group{
+    width:17%; // pai de cada input de anmação q ocupa 20 %
+}
+
+.um-input{
+  width: 90%; // pai de cada input de url q ocupa quase td
+}
+
+
+
+.botoes{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1%;
+}
+
+.jogar-sair{
+  padding: 1%;
+  border: 5px solid white;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  cursor: pointer;
+  margin-top: 1%;
+}
+.jogar-sair:active{
+  top: 3px;
+  bottom: 3px;
+}
+a{
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.1em;
+  text-align: center;
+  font-weight: normal;
+  color: white;
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: none;
+  color: white;
+}

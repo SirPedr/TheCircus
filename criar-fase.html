@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Criar Fase</title>
+    <link rel="shortcut icon" href="imgs/icones/icone.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/div-modal.css">
+    <link rel="stylesheet" href="styles/estilo-criar-fase.css">
+    <link href="https://fonts.googleapis.com/css?family=Metal|Metal+Mania|Press+Start+2P|Rye" rel="stylesheet">
+  </head>
+  <body>
+    <audio id="musica-fundo" src="musicas/criacao-de-level.mp3" autoplay loop="0" ></audio>
+    <div id="mascara"></div>
+    <section id="div-modal" >
+      <h1>Crie sua propria fase aqui!</h1><br>
+      <p>Basta copiar e colar o link de imgs e musicas e escolher a quantidade de inimigos</p>
+      <p>O primeiro input é o link para uma imagem que será o inimigo que se deve atirar e os 5 abaixo são 5 tipos de animação para esse inimigo</p>
+      <p>O mesmo vale para o segundo input sendo que ele é para um inimigo que só deve encostar</p>
+      <p>Os dois ultimos são para colocar uma imagem de fundo e a musica de fundo da fase, respctivamente</p><br>
+      <h1>Colocar arquivos do computador</h1><br>
+      <p>
+        Para upar alguma imagem ou música do seu computador: Pegue e arraste o  arquivo para dentro do navegador
+        depois copie o link que ele fornecer e cole no respectivo campo.
+      </p>
+    </section>
+    <section id="controles">
+      <img id="exclamacao" class="imgs-controles" src="imgs/icones/info.png" draggable="false" style="-webkit-user-select: none; user-select: none;">
+      <img id="som" class="imgs-controles" src="imgs/icones/som.png" draggable="false" style="-webkit-user-select: none; user-select: none;">
+    </section>
+    <section id="conteudo-total">
+        <section id="div-imgs">
+          <img class="imgs-upadas" id="img-alvo-upado" src="imgs/icones/img-upada.png" >
+          <img class="imgs-upadas" id="img-alvo-melee-upado" src="imgs/icones/img-upada.png" >
+          <img class="imgs-upadas" id="img-fundo-upado" src="imgs/icones/img-fundo.png" >
+          <img class="imgs-upadas" src="imgs/icones/musica-upada.png" >
+        </section>
+        <main id="conteudo-parcial">
+            <section  id="tiro">
+                  <article class="input-group um-input" >
+                          <span class="input-group-addon">Link:</span>
+                          <input type="text" class="urls input-group-addon" id="img-alvo" value="" placeholder="Cole o link de uma imagem para ela ser o inimigo alvo do jogo">
+                  </article>
+                  <article class="input-group">
+                          <span class="input-group-addon">Linear</span>
+                          <input type="number" class="animacoes input-group-addon" value="0" min="0" placeholder="Animação linear">
+                  </article>
+                  <article class="input-group">
+                          <span class="input-group-addon">Ease-in</span>
+                          <input type="number" class="animacoes input-group-addon" value="0" min="0" placeholder="Animação ease-in">
+                  </article>
+                  <article class="input-group">
+                          <span class="input-group-addon">Ease-out</span>
+                          <input type="number" class="animacoes input-group-addon" value="0" min="0" placeholder="Animação ease-out">
+                  </article>
+                  <article class="input-group">
+                          <span class="input-group-addon">Ease-in-out</span>
+                          <input type="number" class="animacoes input-group-addon" value="0" min="0" placeholder="Animação ease-in-out">
+                  </article>
+                  <article class="input-group">
+                          <span class="input-group-addon">Dolly</span>
+                          <input type="number" class="animacoes input-group-addon" value="0" min="0" placeholder="Animação dolly">
+                  </article>
+            </section>
+            <section  id="bater">
+                    <article class="input-group um-input">
+                      <span class="input-group-addon">Link:</span>
+                      <input type="text" class="urls input-group-addon" id="img-alvo-melee" value="" placeholder="Cole o link de uma imagem para ela ser o inimigo melee do jogo">
+                    </article>
+
+                    <article class="input-group">
+                      <span class="input-group-addon">Linear</span>
+                      <input type="number" class="animacoes input-group-addon" value="0" min="0" placeholder="Animação linear">
+                    </article>
+
+                    <article class="input-group">
+                      <span class="input-group-addon">Ease-in</span>
+                      <input type="number" class="animacoes input-group-addon" value="0" min="0" placeholder="Animação ease-in">
+                    </article>
+
+                    <article class="input-group">
+                      <span class="input-group-addon">Ease-out</span>
+                      <input type="number" class="animacoes input-group-addon" value="0" min="0" placeholder="Animação ease-out">
+                    </article>
+
+                    <article class="input-group">
+                      <span class="input-group-addon">Ease-in-out</span>
+                      <input type="number" class="animacoes input-group-addon" value="0" min="0" placeholder="Animação ease-in-out">
+                    </article>
+
+                    <article class="input-group">
+                      <span class="input-group-addon">Dolly</span>
+                      <input type="number" class="animacoes input-group-addon" value="0" min="0" placeholder="Animação dolly">
+                    </article>
+
+            </section>
+            <section  id="img-fundo-fase">
+                    <article class="input-group um-input">
+                      <span class="input-group-addon">Link:</span>
+                      <input type="text" class="urls input-group-addon" id="img-fundo" value="" placeholder="Cole o link de uma imagem para ela ser a imagem de fundo do jogo">
+                    </article>
+            </section>
+            <section  id="musica-fundo-fase">
+                    <article class="input-group um-input">
+                      <span class="input-group-addon">Link:</span>
+                      <input type="text" class="urls input-group-addon" id="musica-fundo-input" value="" placeholder="Cole o link de uma música para que ela seja a música de fundo do jogo">
+                    </article>
+            </section>
+        </main>
+    </section>
+    <section class="botoes">
+      <span class="jogar-sair"><a href="index.html">Voltar</a></span>
+      <span class="jogar-sair" id="jogar"><a href="jogo.html">Jogar</a></span>
+    </section>
+    <script src="scripts/tudo.js"></script>
+    <script src="scripts/criar-fase.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,261 @@
+/*------------------------Estiliza a parte do jogo----------------------------*/
+
+body, html{
+  margin: 0% 0%;
+  padding-left: 4%;
+  overflow-y: hidden;
+}
+
+body, html,#tudo{
+  height: 100%;
+}
+
+html{
+  /* background-image:  */
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: opacity 2.5s linear;
+}
+
+.imgs-controles{
+  height: 3.3%;
+  width: 3.3%;
+  padding-top: 0.7%;
+  padding-left: 0.7%;
+  padding-right: 0.7%;
+  float: right;
+  cursor: pointer;
+}
+
+#main-div{
+  height: 78%;
+  display: flex;
+  flex-direction: column;
+}
+
+#subdiv{
+  height: 22%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+#tudo{
+  display:flex;
+  flex-direction: column;
+}
+
+#atirar{
+  cursor: crosshair;
+  user-select: none;
+  height: 63%;
+  width: auto;
+  position: relative;
+}
+
+#bater{
+  cursor: crosshair;
+  user-select: none;
+  height: 37%;
+  width: auto;
+  position: relative;
+}
+
+#esquiva{
+  cursor: url('data:image/x-icon;base64,AAACAAEAICACAAAAAAAwAQAAFgAAACgAAAAgAAAAQAAAAAEAAQAAAAAAgAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAA8AAAA/wAAAP8AAAP/wAAD/8AAD//wAA//8AAP//AAD//wAA//8AAP//AAD+fwAA/n8AAHw+AAAwDAAA//////////////////////////////////////////////////////////////////////////////////////w////8P///8A////AP///AA///wAP//wAA//8AAP//AAD//wAA//8AAP//AAD//wGA//8BgP//g8H//8/z//8='), auto;
+  user-select: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 22%;
+  border-right: 2px solid white;
+  border-left: 2px solid white;
+  border-top: 2px solid white;
+  transition: width 1.5s linear;
+  position: relative;
+}
+
+#info{
+  user-select: none;
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: auto;
+  flex-grow: 1;
+  border-right: 2px solid white;
+  border-top: 2px solid white;
+  transition: opacity 1s linear;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+ .informacoes > span{
+  display: block;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.2em;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+#relogio{
+  display: inline;
+  height: 8%;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+  margin-top: 0.5%;
+}
+
+#tempo{
+  font-family: 'Press Start 2P', cursive;
+  font-size: 120%;
+  color: white;
+}
+
+#sair{
+    padding: 40% 85%;
+    border: 2px solid white;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+#esquerda{
+    user-select: none;
+    width: 2%;
+    height: 1%;
+    position: fixed;
+    bottom: 4.5%;
+    left: 1.0%;
+}
+
+#esquerda:active{
+  bottom: 4.3%;
+  left: 1.7%;
+}
+
+a{
+  font-family: 'Rye', cursive;
+  text-align: center;
+  font-weight: normal;
+  color: white;
+  text-decoration: none;
+}
+
+/*------------------Classes que o javascript está usando----------------------*/
+.semi-boss{
+  cursor: crosshair;
+  user-select: none;
+  height: 50%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+#bola-vermelho, #bola-verde, #bola-azul{
+  transition: top 1.5s linear, left 1.5s linear;
+  border: 2px solid black;
+  border-radius: 50%;
+  height: 50%;
+  position: absolute;
+}
+
+#bola-vermelho{
+  background-color: rgba(255, 0, 0, 0.7);
+}
+#bola-verde{
+  background-color: rgba(0, 255, 0, 0.7);
+}
+#bola-azul{
+  background-color: rgba(0, 0, 255, 0.7);
+}
+#bola-amarela{
+  position: absolute;
+  background-color: rgba(255, 255, 0, 0.7);
+  border: 2px solid black;
+  border-radius: 50%;
+  height: 85%;
+  top: 10%;
+  animation: movimentoDaBolaAmarela 3.5s linear 2s infinite alternate;
+}
+@keyframes movimentoDaBolaAmarela{
+  0%   {left: 0%}
+  100% {left: 85%}
+}
+
+/* .divsBossAtiva{} */
+.divsBossDesativada{
+  pointer-events: none;
+  display: none;
+}
+
+.atira, .bate{
+  cursor: crosshair;
+  user-select: none;
+  height: 22%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.morto, .morto-melee{
+  pointer-events: none;
+  animation: morrendo 0.5s linear 0s 1;
+}
+
+@keyframes morrendo{
+  from {opacity: 1}
+  to   {opacity: 0}
+}
+
+/* o javascript fica responsavel por alterar as posições e o transition
+que vai fazer a animação do deslocamento */
+/* animações dos inimigos */
+.linear{
+  transition: top 1.8s linear, left 1.8s linear;
+}
+.ease-in{
+  transition: top 1.8s ease-in, left 1.8s ease-in;
+}
+.ease-out{
+  transition: top 1.8s ease-out, left 1.8s ease-out;
+}
+.ease-in-out{
+  transition: top 1.8s ease-in-out, left 1.8s ease-in-out;
+}
+.dolly{
+  transition: top 1.8s cubic-bezier(0.15, 0.36, 0.59, 1.03), left 1.8s cubic-bezier(0.15, 0.36, 0.59, 1.03);
+}
+.semi-boss-anima{
+  transition: top 1.8s cubic-bezier(0.81, 0.24, 0.74, 1.22), left 1.8s cubic-bezier(0.81, 0.24, 0.74, 1.22);
+}
+
+.danoBoss, #acabaAtaque{
+  background-color: #FEFEFE;
+  border: 2px solid black;
+  border-radius: 50%;
+  opacity: 0.8;
+  position: absolute;
+  height: 20%;
+  top: 0;
+  left: 0;
+  transition: top 1s linear, left 1s linear;
+  animation: morrendo 0.5s linear 0s 1;
+}
+
+#acabaAtaque{
+  background-color: #3F8CAA;
+}
+
+#img-personagem{
+  float: left;
+  margin: 1% 1%;
+  margin-top: 0;
+  padding: 0.5% 0.5%;
+  height: 100px;
+}
+
+#texto-personagem{
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1em;
+  font-weight: normal;
+  color: white;
+  text-align: left;
+}

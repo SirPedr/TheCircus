@@ -1,0 +1,79 @@
+body,html{
+  height: 100%;
+}
+
+body{
+  background-image: url(../imgs/fundos/menina-circo.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#controles{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.imgs-controles{
+  height: 3%;
+  width: 3%;
+  padding-left: 0.5%;
+  padding-right: 0.5%;
+  cursor: pointer;
+}
+
+h1{
+  font-family: 'Rye', cursive;
+  font-size: 6.3em;
+  text-align: center;
+  font-weight: normal;
+}
+
+h2{
+  font-family: 'Rye', cursive;
+  font-size: 3em;
+  font-weight: normal;
+  text-align: center;
+}
+
+h3{
+  font-family: 'PRESS START 2P', cursive;
+  font-size: 2.5em;
+  font-weight: normal;
+  text-align: center;
+  color: #882D2E;
+}
+
+li{
+  font-family: 'PRESS START 2P', cursive;
+  list-style: none;
+  text-align: center;
+  font-size: 1em;
+  color: #98989B;
+}
+
+a{
+  font-family: 'PRESS START 2P', cursive;
+  color: #98989B;
+  text-align: center;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+#voltar{
+  padding: 1%;
+  border: 5px solid white;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  margin: 1% 1%;
+  float: left;
+}
+
+#voltar:active{
+  top: 3px;
+  left: 3px;
+}
+
+#voltar > a{
+  color: white;
+}

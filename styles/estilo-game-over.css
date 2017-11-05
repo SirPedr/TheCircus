@@ -1,0 +1,57 @@
+html{
+  overflow-y: hidden;
+}
+
+body{
+  background-image: url(../imgs/fundos/brinquedos.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-position: top;
+  }
+
+/* contador que vai diminuido até 0. Se chegar a 0 leva par o menu */
+#contador{
+  display: block;
+  font-size: 8em;
+  margin-bottom: 9%;
+  color: #882D2E;
+  font-family: 'Metal Mania', cursive;
+}
+
+h1{
+  font-family: 'Metal Mania', cursive;
+  font-size: 5em;
+  font-weight: normal;
+  color: #882D2E;
+}
+
+.escolha{
+  display: block;
+  font-size: 1.5em;
+  margin-bottom: 3%;
+}
+
+h1, .escolha, #contador{
+  text-align: center;
+}
+
+a{
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  font-weight: normal;
+  color: black;
+  text-decoration: none;
+}
+#controles{
+  display: flex;
+  justify-content: flex-end;
+
+}
+.imgs-controles{
+  height: 3%;
+  width: 3%;
+  padding-left: 0.5%;
+  padding-right: 0.5%;
+  cursor: pointer;
+}

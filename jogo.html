@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jogando</title>
+    <link rel="shortcut icon" href="imgs/icones/icone.png">
+    <link rel="stylesheet" href="styles/div-modal.css">
+    <link rel="stylesheet" href="styles/estilo-jogo.css">
+    <link href="https://fonts.googleapis.com/css?family=Metal|Metal+Mania|Press+Start+2P|Rye" rel="stylesheet">
+  </head>
+  <body>
+    <audio id="musica-fundo" src="" autoplay loop="0" ></audio>
+    <div id="mascara"></div>
+    <section id="div-modal" >
+      <!-- textos da historia vem aqui -->
+    </section>
+    <section id="controles">
+      <img id="exclamacao" class="imgs-controles" src="imgs/icones/info.png" draggable="false" style="-webkit-user-select: none; user-select: none; display: none;">
+      <img id="som" class="imgs-controles" src="imgs/icones/som.png" draggable="false" style="-webkit-user-select: none; user-select: none;">
+    </section>
+    <section id="tudo" >
+      <section id="main-div">
+        </article><article id="atirar">
+          <img src="imgs/icones/relogio.png" alt="um relôgio contando o tempo que falta para você acertar os inimigos" id="relogio">
+          <span id="tempo">120s</span>
+          <!-- inimigos criados dinamicamente no js -->
+        </article><article id="bater">
+          <!-- inimigos criados dinamicamente no js -->
+        </article>
+      </section>
+      <section id="subdiv">
+        <article id="esquiva">
+        </article>
+        <article id="info">
+          <div class="informacoes">
+            <span>Vida</span>
+            <span id="contador-vida">15</span>
+          </div>
+          <div class="informacoes">
+            <span>Máximo de Clicks</span>
+            <span id="contador-clicks">20</span>
+          </div>
+          <div class="informacoes">
+            <span>Tempo Parado</span>
+            <span id="contador-parado">15s</span>
+          </div>
+        </article>
+      </section>
+    </section>
+    <article id="esquerda">
+      <span id="sair"><a href="index.html">sair</a></span>
+    </article>
+    <script src="scripts/tudo.js" charset="utf-8"></script>
+    <script src="scripts/funcoes-do-jogo.js" charset="utf-8"></script>
+    <script src="scripts/jogo.js" charset="utf-8"></script>
+  </body>
+</html>

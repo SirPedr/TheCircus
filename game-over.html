@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Game Over</title>
+    <link rel="shortcut icon" href="imgs/icones/icone.png">
+    <link rel="stylesheet" href="styles/estilo-game-over.css">
+    <link rel="stylesheet" href="styles/div-modal.css">
+    <link href="https://fonts.googleapis.com/css?family=Metal|Metal+Mania|Press+Start+2P|Rye" rel="stylesheet">
+  </head>
+  <body>
+    <audio id="musica-fundo" src="musicas/game-over.mp3" autoplay></audio>
+    <div id="mascara"></div>
+    <section id="div-modal" class="esconde">
+      <p>Não tem nada aqui =]</p>
+    </section>
+    <section id="controles">
+      <img id="som" class="imgs-controles" src="imgs/icones/som.png" draggable="false" style="-webkit-user-select: none; user-select: none;">
+      <img id="exclamacao" class="imgs-controles" src="imgs/icones/info.png" draggable="false" style="-webkit-user-select: none; user-select: none;">
+    </section>
+    <h1>Você Falhou</h1>
+    <span id="contador">60</span>
+    <a href="jogo.html" class="escolha">Tentar Novamente</a>
+    <a href="index.html" class="escolha">Menu</a>
+
+    <script src="scripts/game-over.js" charset="utf-8"></script>
+    <script src="scripts/tudo.js" charset="utf-8"></script>
+  </body>
+</html>
