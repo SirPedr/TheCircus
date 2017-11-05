@@ -38,7 +38,7 @@ if(jogador === null){
   window.location.replace('brinquedos.html');
 }
 
-if(jogador != null && jogador.fase > 0 && jogador.fase < 7){
+if(jogador != null && jogador.fase > 0 && jogador.fase < 7 && jogador.arma !== ""){
   switch (jogador.fase) {
     case 1:
       criaFase("url('imgs/fundos/fase-1.jpg')", "musicas/level-1.mp3", "imgs/inimigos/balao.png", "", 3, 3, 3, 3, 3, 0, 0, 0, 0, 0); /*15*/

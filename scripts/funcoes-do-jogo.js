@@ -253,48 +253,22 @@ function espada(){
 function metralhadora(){
   let divAtirar = document.querySelector('#atirar');
   if(jogador.fase !== 5){
-    divAtirar.addEventListener('mousedown', danoMetralhadora);
-  }
-  else{
-    divAtirar.addEventListener('mousedown', danoMetralhadoraBoss);
-  }
-  /* remover o evento dos inimigos morrerem com mouseenter para que sempre tenha que abaixar o mouse para atirar */
-  document.querySelector('html').addEventListener('mouseup', function(){
-    if(jogador.fase !== 5){
+    divAtirar.addEventListener('mousedown', function(){
       let alvos = document.querySelectorAll('.atira');
       for(let alvo of alvos){
-        alvo.removeEventListener('mouseenter', morto);
+        alvo.addEventListener('mouseenter', morto);
       }
-      divAtirar.removeEventListener('mousedown', danoMetralhadora);
-      clearInterval(intervalosDoJogo.clearTiroMetralhadora);
-      metralhadora();
-    }
-    else{
+    });
+  }
+  else{
+    divAtirar.addEventListener('mousedown', function(){
       let bolas = document.querySelectorAll('.divsBossAtiva');
       for(let bola of bolas){
-        bola.removeEventListener('mouseenter', desativaDivBoss);
+        bola.addEventListener('mouseenter', desativaDivBoss);
       }
-      divAtirar.removeEventListener('mousedown', danoMetralhadoraBoss);
-      clearInterval(intervalosDoJogo.clearTiroMetralhadora);
-      metralhadora();
-    }
-  });
-
+    });
+  }
   bater();
-}
-
-/* as duas ultimas funções estão fora para funcionar o removeEventListener */
-function danoMetralhadora(){
-  let alvos = document.querySelectorAll('.atira');
-  for(let alvo of alvos){
-    alvo.addEventListener('mouseenter', morto);
-  }
-}
-function danoMetralhadoraBoss(){
-  let bolas = document.querySelectorAll('.divsBossAtiva');
-  for(let bola of bolas){
-    bola.addEventListener('mouseenter', desativaDivBoss);
-  }
 }
 /*----------------------------funções do semi-boss---------------------------*/
 
@@ -602,6 +576,24 @@ function criaFase(fundo, musicaFundo, imgInimigoA, imgInimigoM, a1, a2, a3, a4, 
   }
   else if(jogador.arma == "metralhadora"){
     divAtirarEl.addEventListener('mousedown', diminuiClicksJogador);
+    document.querySelector('html').addEventListener('mouseup', function(){
+      clearInterval(intervalosDoJogo.clearTiroMetralhadora);
+      if(jogador.fase === 5){
+        let bolaAzul = document.querySelector('#bola-azul');
+        let bolaVermelha = document.querySelector('#bola-verde');
+        let bolaVerde = document.querySelector('#bola-vermelha');
+
+        bolaAzul.removeEventListener('mouseenter', desativaDivBoss);
+        bolaVermelha.removeEventListener('mouseenter', desativaDivBoss);
+        bolaVerde.removeEventListener('mouseenter', desativaDivBoss);
+      }
+      else{
+        let alvos = document.querySelectorAll('.atira');
+        for(let alvo of alvos){
+          alvo.removeEventListener('mouseenter', morto);
+        }
+      }
+    });
     metralhadora();
   }
 }

@@ -326,7 +326,7 @@ somEl.addEventListener('click',function(){
 
 jogador = carregar(jogador);
 
-if(jogador != null && jogador.fase >= 0 && jogador.fase <= 6){
+if(jogador != null && jogador.fase >= 0 && jogador.fase <= 6 && jogador.arma !== ""){
   switch (jogador.fase){
     case 0:
       mudaAmbientacao("url(imgs/fundos/lona-circo.jpg)", "musicas/musica-fundo-index.mp3");
