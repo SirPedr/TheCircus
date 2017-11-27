@@ -6,6 +6,7 @@ body{
   background-image: url(../imgs/fundos/lona-circo.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: bottom center;
   overflow: hidden;
 }
 #controles{

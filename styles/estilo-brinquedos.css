@@ -3,7 +3,7 @@ body,html{
 }
 body{
   background-image: url(../imgs/fundos/menina-circo.jpg);
-  background-size: auto;
+  background-size: auto; /* tem que ser auto porque se não for não cobre até o fundo */
   background-repeat: no-repeat;
 }
 #controles{
@@ -97,4 +97,11 @@ img{
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+/* classe do js */
+
+.escolhida{
+  border: 5px solid green;
+  border-radius: 50%;
 }

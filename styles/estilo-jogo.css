@@ -47,28 +47,19 @@ html{
 #atirar{
   cursor: crosshair;
   user-select: none;
-  height: 63%;
-  width: auto;
-  position: relative;
-}
-
-#bater{
-  cursor: crosshair;
-  user-select: none;
-  height: 37%;
+  height: 100%;
   width: auto;
   position: relative;
 }
 
 #esquiva{
+  display: none;
   cursor: url('data:image/x-icon;base64,AAACAAEAICACAAAAAAAwAQAAFgAAACgAAAAgAAAAQAAAAAEAAQAAAAAAgAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAA8AAAA/wAAAP8AAAP/wAAD/8AAD//wAA//8AAP//AAD//wAA//8AAP//AAD+fwAA/n8AAHw+AAAwDAAA//////////////////////////////////////////////////////////////////////////////////////w////8P///8A////AP///AA///wAP//wAA//8AAP//AAD//wAA//8AAP//AAD//wGA//8BgP//g8H//8/z//8='), auto;
   user-select: none;
   background-color: rgba(0, 0, 0, 0.5);
   height: 100%;
   width: 22%;
-  border-right: 2px solid white;
-  border-left: 2px solid white;
-  border-top: 2px solid white;
+  border: 2px solid white;
   transition: width 1.5s linear;
   position: relative;
 }
@@ -79,8 +70,7 @@ html{
   height: 100%;
   width: auto;
   flex-grow: 1;
-  border-right: 2px solid white;
-  border-top: 2px solid white;
+  border: 2px solid white;
   transition: opacity 1s linear;
   display: flex;
   justify-content: space-around;
@@ -143,17 +133,17 @@ a{
 .semi-boss{
   cursor: crosshair;
   user-select: none;
-  height: 50%;
+  height: 30%;
   position: absolute;
   top: 0px;
   left: 0px;
 }
 
-#bola-vermelho, #bola-verde, #bola-azul{
+#bola-vermelho, #bola-verde, #bola-azul, #bola-amarela{
   transition: top 1.5s linear, left 1.5s linear;
   border: 2px solid black;
   border-radius: 50%;
-  height: 50%;
+  height: 35%;
   position: absolute;
 }
 
@@ -167,17 +157,7 @@ a{
   background-color: rgba(0, 0, 255, 0.7);
 }
 #bola-amarela{
-  position: absolute;
   background-color: rgba(255, 255, 0, 0.7);
-  border: 2px solid black;
-  border-radius: 50%;
-  height: 85%;
-  top: 10%;
-  animation: movimentoDaBolaAmarela 3.5s linear 2s infinite alternate;
-}
-@keyframes movimentoDaBolaAmarela{
-  0%   {left: 0%}
-  100% {left: 85%}
 }
 
 /* .divsBossAtiva{} */
@@ -186,16 +166,16 @@ a{
   display: none;
 }
 
-.atira, .bate{
+.atira{
   cursor: crosshair;
   user-select: none;
-  height: 22%;
+  height: 14%;
   position: absolute;
   top: 0px;
   left: 0px;
 }
 
-.morto, .morto-melee{
+.morto{
   pointer-events: none;
   animation: morrendo 0.5s linear 0s 1;
 }
