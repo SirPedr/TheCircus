@@ -1,3 +1,5 @@
+/* jogador declarado nas funções essencias */
+
 /* mostra como vai ficar as imgs e a musica */
 let inputAlvoEl = document.querySelector('#img-alvo');
 let inputAlvoMeleeEl = document.querySelector('#img-alvo-melee');
@@ -54,17 +56,6 @@ var fase = {
   a: [0, 0, 0, 0, 0],
   m: [0, 0, 0, 0, 0]
 };
-var jogador = {
-  fase: 0, /* fase que o jogador esta */
-  arma: "", /* arma escolhida na pagina de brinquedos */
-  inimigosMortos: 0, /* numero de inimigos mortos que zera a cada fase */
-  vida: 15, /* vida do jogador. So utilizada com inimigos diferenciados */
-  danoBoss: 0, /* dano de bosses e semi-bosses */
-  bolasDestruidas: 0, /* Parte especial para o boss */
-  clicks: 100, /* numero maximo de clicks de cada fase */
-  parado: 15, /* tempo maximo que o mouse pode ficar parado */
-  tempo: 120 /* tempo ate o fim da fase */
-};
 
 jogarEl.addEventListener('click', function(){
   let inputNumIniEl = document.querySelectorAll('.animacoes');
@@ -79,10 +70,9 @@ jogarEl.addEventListener('click', function(){
     fase.m[i - 5] = inputNumIniEl[i].value;
   }
 
-  jogador = localStorage.getItem('save');
-  jogador = JSON.parse(jogador);
+  jogador = carregar(jogador);
   jogador.fase = 6;
-  localStorage.setItem('save', JSON.stringify(jogador));
+  salvar(jogador);
   localStorage.setItem('fase-personalizada', JSON.stringify(fase));
   window.location.replace('jogo.html');
 });

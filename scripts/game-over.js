@@ -1,6 +1,6 @@
 let tempo = 60;
 
-function reduzContador(){
+setInterval(function(){
   let contador = document.querySelector('#contador');
 
   tempo = tempo - 1;
@@ -8,6 +8,4 @@ function reduzContador(){
   if(tempo === 0){
     window.location.replace("index.html");
   }
-}
-
-setInterval(function(){reduzContador()}, 1000);
+}, 1000);

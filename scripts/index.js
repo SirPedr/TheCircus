@@ -10,7 +10,6 @@ jogarEl.addEventListener('click',function(){
     campanhaEl.classList.add('opcoes-menu');
     divPaiEl.appendChild(campanhaEl);
 
-
     let criarFaseEl = document.createElement('span');
     criarFaseEl.innerHTML = '<a href="criar-fase.html">Criar Fase</a>';
     criarFaseEl.classList.add('opcoes-menu');

@@ -1,5 +1,7 @@
 /*------------------------------------O jogo----------------------------------*/
 
+/* jogador declarado nas funções essencias */
+
 var intervalosDoJogo = {
   clearTempo: null,
   clearTempoParado: null,
@@ -8,20 +10,6 @@ var intervalosDoJogo = {
   clearVitoria: null,
   clearAtaque: null,
   clearTiroMetralhadora: null,
-  clearFuga: null
-};
-
-var jogador = {
-  fase: 0, /* fase que o jogador esta */
-  personagem: "",
-  arma: "", /* arma escolhida na pagina de brinquedos */
-  inimigosMortos: 0, /* numero de inimigos mortos que zera a cada fase */
-  vida: 15, /* vida do jogador. So utilizada com inimigos diferenciados */
-  danoBoss: 0, /* dano de bosses e semi-bosses */
-  bolasDestruidas: 0, /* Parte especial para o boss */
-  clicks: 100, /* numero maximo de clicks de cada fase */
-  parado: 15, /* tempo maximo que o mouse pode ficar parado */
-  tempo: 120 /* tempo ate o fim da fase */
 };
 
 var fase = {
@@ -54,35 +42,35 @@ if(jogador != null && jogador.fase > 0 && jogador.fase < 7 && jogador.arma !== "
 
     case 4:
       criaFase("url('imgs/fundos/boss.png')", "musicas/semi-boss.mp3", "imgs/inimigos/palhaco-mal2.png", "imgs/inimigos/cavera.png", 4, 7, 4, 3, 6, 4, 2, 4, 5, 1); /*40*/
-      defineMaxClick(jogador, 42);
+      defineMaxClick(jogador, 72);
       colocaSemiBoss("imgs/inimigos/leao.png");
       clearInterval(intervalosDoJogo.clearVitoria);
-      intervalosDoJogo.clearVitoria = setInterval(function(){vitoriaSobSemiBoss(20, 20)}, 1500);
+      intervalosDoJogo.clearVitoria = setInterval(function(){vitoriaSobSemiBoss(20+20)}, 1500);
 
       let semiBoss = document.querySelector('.semi-boss'); /* Não prescisa ser All pq só tera 1 sempre */
 
       if(jogador.arma == "espada"){
         espada();
-        semiBoss.addEventListener('mouseup', function(){danoNoSemiBoss(20, 20, jogador)});
+        semiBoss.addEventListener('mouseenter', function(){danoNoSemiBoss(20+20, jogador)});
       }
       else if(jogador.arma == "pistola"){
         pistola();
-        semiBoss.addEventListener('click', function(){danoNoSemiBoss(20, 20, jogador)});
+        semiBoss.addEventListener('click', function(){danoNoSemiBoss(20+20, jogador)});
       }
       else if(jogador.arma == "metralhadora"){
         metralhadora();
-        semiBoss.addEventListener('mouseenter', function(){danoNoSemiBoss(20, 20, jogador)});
+        semiBoss.addEventListener('mouseenter', function(){danoNoSemiBoss(20+20, jogador)});
       }
     break;
 
     case 5:
       jogador.bolasDestruidas = 0;
-      criaDivDoBoss("bola-azul", '#atirar');
-      criaDivDoBoss("bola-verde", '#atirar');
-      criaDivDoBoss("bola-vermelho", '#atirar');
-      criaDivDoBoss("bola-amarela", '#bater');
+      criaDivDoBoss("bola-azul");
+      criaDivDoBoss("bola-verde");
+      criaDivDoBoss("bola-vermelho");
+      criaDivDoBoss("bola-amarela");
       criaFase("url('imgs/fundos/boss-pistola.png')", "musicas/boss.mp3", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-      defineMaxClick(jogador, 70);
+      defineMaxClick(jogador, 85);
       alternaBolasBoss();
       clearInterval(intervalosDoJogo.clearAnimacao);
       clearInterval(intervalosDoJogo.clearVitoria);

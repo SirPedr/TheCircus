@@ -14,49 +14,44 @@ function pegaAltura(idClasseElemento){
 
 /*---------------------funções que manipulam classes--------------------------*/
 
-/* cloca os inimigos na fase a e b são, respctivamente, o numero de inimigos que deve atirar e bater*/
-function inicializaInimigos(a, b){
+/* cloca os inimigos na fase a e b são, respctivamente, o numero de inimigos que deve atirar*/
+function inicializaInimigos(a){
   let alvos = document.querySelectorAll('.morto');
-  let alvosMelee = document.querySelectorAll('.morto-melee');
 
   for(let l = 0; l < a; l++){
     alvos[l].classList.remove('morto');
     alvos[l].classList.add('atira');
-  }
-  for(l = 0; l < b; l++){
-    alvosMelee[l].classList.remove('morto-melee');
-    alvosMelee[l].classList.add('bate');
   }
 }
 
 /* remove a imagem e "faz" a animação de desaparecer*/
 function morto(e){
   let acertado = e.currentTarget;
-  if(acertado.classList.contains('atira')){
-    acertado.classList.add('morto');
-    acertado.addEventListener('animationend', function(){
-      acertado.style.display = "none";
-      acertado.classList.remove('atira');
-    });
-  }
-  else if(acertado.classList.contains('bate')){
-    acertado.classList.add('morto-melee');
-    acertado.addEventListener('animationend', function(){
-      acertado.style.display = "none";
-      acertado.classList.remove('bate');
-    });
-  }
+  acertado.classList.add('morto');
+  acertado.addEventListener('animationend', function(){
+    acertado.style.display = "none";
+    acertado.classList.remove('atira');
+  });
   jogador.inimigosMortos = jogador.inimigosMortos + 1;
   if(jogador.arma === "espada"){
     let alvos = document.querySelectorAll('.atira');
     for(let alvo of alvos){
       alvo.removeEventListener('mouseenter', morto);
+      alvo.removeEventListener('mouseenter', somEspada);
     }
   }
 }
 
 /* remove as bolas do boss */
 function desativaDivBoss(e){
+  if(jogador.arma === "espada"){
+    let bolas = document.querySelectorAll('.divsBossAtiva');
+    for(bola of bolas){
+      bola.removeEventListener('mouseenter', desativaDivBoss);
+      bola.removeEventListener('mouseenter', somEspada);
+    }
+  }
+
   if(jogador.danoBoss % 5 === 0 && jogador.danoBoss !== 0){
       let acertado = e.currentTarget;
       jogador.danoBoss = jogador.danoBoss + 1;
@@ -78,8 +73,8 @@ function desativaDivBoss(e){
 /*--------------funções com ações (tempo, ganhar, salvar, etc)----------------*/
 
 /* verificar se o jogador ganhou a e b são os mesmos valores que foram passados na função que inicializa os inimigos*/
-function vitoria(a, b){
-  if(jogador.inimigosMortos === a + b){
+function vitoria(a){
+  if(jogador.inimigosMortos === a){
     let musicaFundoEl = document.querySelector('#musica-fundo');
     jogador.fase = jogador.fase + 1;
     clearInterval(intervalosDoJogo.clearTempo);
@@ -131,8 +126,6 @@ function animacao(jogador){
   }
   /* anima os alvos */
   animaAleatorio('.atira', '#atirar', 120, 10, 45);
-  /* anima os inimigos melee */
-  animaAleatorio('.bate', '#bater', 80, 10, 25);
 }
 
 /* reduzir o tempo do relogio */
@@ -140,18 +133,6 @@ function diminuiTempo(jogador){
   let tempo = document.querySelector('#tempo');
   jogador.tempo = jogador.tempo - 1;
   tempo.innerHTML = jogador.tempo + "s";
-}
-
-/* salvar o jogo */
-function salvar(jogador){
-  localStorage.setItem('save', JSON.stringify(jogador));
-}
-
-/* carregar o save e retorna o objeto */
-function carregar(jogador){
-  jogador = localStorage.getItem('save');
-  jogador = JSON.parse(jogador);
-  return jogador;
 }
 
 /* verifica se o mouse esta parado e reduz o tempo max dele parado */
@@ -184,6 +165,9 @@ function diminuiClicksJogador(){
     intervalosDoJogo.clearTiroMetralhadora = setInterval(function(){
       jogador.clicks = jogador.clicks - 1;
       contadorClicksEl.innerHTML = jogador.clicks;
+      let audioEfeitoSonoroEl = document.querySelector('#efeito-sonoro');
+      audioEfeitoSonoroEl.src = "efeitos-sonoros/tiro-metralhadora.wav";
+      audioEfeitoSonoroEl.play();
     }, 200);
   }
   else{
@@ -191,24 +175,15 @@ function diminuiClicksJogador(){
     contadorClicksEl.innerHTML = jogador.clicks;
   }
 }
-/*----------------------------funções das armas ------------------------------*/
-
-function bater(){
-  if(jogador.fase != 5){
-    let alvosMelee = document.querySelectorAll('.bate');
-
-    for(let alvoMelee of alvosMelee){
-      alvoMelee.addEventListener('mouseenter', morto);
-    }
-  }
-  else{
-    let bolaAmarelaEl = document.querySelector('#bola-amarela');
-
-    bolaAmarelaEl.addEventListener('mouseenter', desativaDivBoss);
-  }
-}
+/*----------------------------funções das armas-------------------------------*/
 
 function pistola(){
+  let audioEfeitoSonoroEl = document.querySelector('#efeito-sonoro');
+  audioEfeitoSonoroEl.src = "efeitos-sonoros/tiro-pistola.wav";
+
+  document.querySelector('#atirar').addEventListener('click', function(){
+    audioEfeitoSonoroEl.play();
+  });
 
   if(jogador.fase !== 5){
     let alvos = document.querySelectorAll('.atira');
@@ -223,17 +198,26 @@ function pistola(){
       bola.addEventListener('click', desativaDivBoss);
     }
   }
+}
 
-  bater();
+function somEspada(){
+  document.querySelector('#efeito-sonoro').play();
 }
 
 function espada(){
   let divAtirar = document.querySelector('#atirar');
+  let audioEfeitoSonoroEl = document.querySelector('#efeito-sonoro');
+  audioEfeitoSonoroEl.src = "efeitos-sonoros/bate-espada.wav";
 
   if(jogador.fase !== 5){
     let alvos = document.querySelectorAll('.atira');
     divAtirar.addEventListener('mousedown', function(){
       for(let alvo of alvos){
+        alvo.addEventListener('mouseenter', somEspada);
+      }
+    });
+    divAtirar.addEventListener('mousedown', function(){
+      for(alvo of alvos){
         alvo.addEventListener('mouseenter', morto);
       }
     });
@@ -242,12 +226,15 @@ function espada(){
     let bolas = document.querySelectorAll('.divsBossAtiva');
     divAtirar.addEventListener('mousedown', function(){
       for(let bola of bolas){
+        bola.addEventListener('mouseenter', somEspada);
+      }
+    });
+    divAtirar.addEventListener('mousedown', function(){
+      for(bola of bolas){
         bola.addEventListener('mouseenter', desativaDivBoss);
       }
     });
   }
-
-  bater();
 }
 
 function metralhadora(){
@@ -268,13 +255,15 @@ function metralhadora(){
       }
     });
   }
-  bater();
 }
 /*----------------------------funções do semi-boss---------------------------*/
 
 /* faz o semiBoss so tomar dano apos todos inimigos estiverem mortos */
-function danoNoSemiBoss(a, b, jogador){
-  if(jogador.inimigosMortos === a + b){
+function danoNoSemiBoss(a, jogador){
+  if(jogador.arma === 'espada'){
+    somEspada();
+  }
+  if(jogador.inimigosMortos === a){
     jogador.danoBoss = jogador.danoBoss + 1;
   }
   else{
@@ -284,7 +273,7 @@ function danoNoSemiBoss(a, b, jogador){
 }
 
 /* vitoria especial caso a fase tenha um semiBoss */
-function vitoriaSobSemiBoss(a, b){
+function vitoriaSobSemiBoss(a){
   if(jogador.danoBoss >= 10){
     /* coloca a classe que o boss morreu e anima a morte */
     let semiBoss = document.querySelector('.semi-boss');
@@ -294,7 +283,7 @@ function vitoriaSobSemiBoss(a, b){
       semiBoss.classList.remove('atira');
     });
     /* troca de fase */
-    vitoria(a, b);
+    vitoria(a);
   }
 }
 
@@ -313,10 +302,10 @@ function colocaSemiBoss(img){
 
 /*-------------------------------funções do boss------------------------------*/
 
-/* receba a id que dara a cor, transition e position e  uma divX(atirar ou bater) */
-function criaDivDoBoss(id, divX){
+/* receba a id que dara a cor, transition e position e  uma divX(atirar) */
+function criaDivDoBoss(id){
   let divBoss = document.createElement('div');
-  let conteiner = document.querySelector(divX);
+  let conteiner = document.querySelector('#atirar');
 
   divBoss.id = id;
   divBoss.classList.add('divsBossAtiva');
@@ -331,6 +320,7 @@ function alternaBolasBoss(){
   let bolaAzulEl = document.querySelector('#bola-azul');
   let bolaVermelhaEl = document.querySelector('#bola-vermelho');
   let bolaVerdeEl = document.querySelector('#bola-verde');
+  let bolaAmarelaEl = document.querySelector('#bola-amarela');
 
   let larguraDaDiv = pegaLargura('#atirar');
   let alturaDaDiv = pegaAltura('#atirar');
@@ -339,15 +329,18 @@ function alternaBolasBoss(){
   let alturaDaBola = pegaAltura('#bola-azul');
 
   let posicao1X = 0 + "px";
-  let posicao1Y = alturaDaDiv - alturaDaBola + "px";
+  let posicao1Y = (50/100 * alturaDaDiv) - alturaDaBola/2 + "px";
 
-  let posicao2X = larguraDaDiv - larguraDaBola + "px";
+  let posicao2X = (50/100 * larguraDaDiv) - (larguraDaBola/2) + "px";
   let posicao2Y = alturaDaDiv - alturaDaBola + "px";
 
-  let posicao3X = (50/100 * larguraDaDiv) - (larguraDaBola/2) + "px";
-  let posicao3Y = 0 + "px";
+  let posicao3X = larguraDaDiv - larguraDaBola + "px";
+  let posicao3Y = (50/100 * alturaDaDiv) - alturaDaBola/2 + "px";
 
-  if(bolaAzulEl.style.left === posicao1X){
+  let posicao4X = (50/100 * larguraDaDiv) - (larguraDaBola/2) + "px";
+  let posicao4Y = 0 + "px";
+
+  if(bolaAzulEl.style.left === posicao1X && bolaAzulEl.style.top === posicao1Y){
     bolaAzulEl.style.left = posicao2X;
     bolaAzulEl.style.top = posicao2Y;
 
@@ -356,16 +349,35 @@ function alternaBolasBoss(){
 
     bolaVerdeEl.style.left = posicao1X;
     bolaVerdeEl.style.top = posicao1Y;
+
+    bolaAmarelaEl.style.left = posicao4X;
+    bolaAmarelaEl.style.top = posicao4Y;
   }
-  else if(bolaAzulEl.style.left === posicao2X){
+  else if(bolaAzulEl.style.left === posicao2X && bolaAzulEl.style.top === posicao2Y){
     bolaAzulEl.style.left = posicao3X;
     bolaAzulEl.style.top = posicao3Y;
+
+    bolaVermelhaEl.style.left = posicao4X;
+    bolaVermelhaEl.style.top = posicao4Y;
+
+    bolaVerdeEl.style.left = posicao2X;
+    bolaVerdeEl.style.top = posicao2Y;
+
+    bolaAmarelaEl.style.left = posicao1X;
+    bolaAmarelaEl.style.top = posicao1Y;
+  }
+  else if(bolaAzulEl.style.left === posicao3X && bolaAzulEl.style.top === posicao3Y){
+    bolaAzulEl.style.left = posicao4X;
+    bolaAzulEl.style.top = posicao4Y;
 
     bolaVermelhaEl.style.left = posicao1X;
     bolaVermelhaEl.style.top = posicao1Y;
 
-    bolaVerdeEl.style.left = posicao2X;
-    bolaVerdeEl.style.top = posicao2Y;
+    bolaVerdeEl.style.left = posicao3X;
+    bolaVerdeEl.style.top = posicao3Y;
+
+    bolaAmarelaEl.style.left = posicao2X;
+    bolaAmarelaEl.style.top = posicao2Y;
   }
   else{
     bolaAzulEl.style.left = posicao1X;
@@ -374,8 +386,11 @@ function alternaBolasBoss(){
     bolaVermelhaEl.style.left = posicao2X;
     bolaVermelhaEl.style.top = posicao2Y;
 
-    bolaVerdeEl.style.left = posicao3X;
-    bolaVerdeEl.style.top = posicao3Y;
+    bolaVerdeEl.style.left = posicao4X;
+    bolaVerdeEl.style.top = posicao4Y;
+
+    bolaAmarelaEl.style.left = posicao3X;
+    bolaAmarelaEl.style.top = posicao3Y;
   }
 }
 
@@ -388,25 +403,24 @@ function aumentaDivEsquiva(){
   divInfEl.addEventListener('transitionend', function(){
     divInfEl.style.display = "none";
   });
-  divEsquivaEl.style.width = pegaLargura('#bater') + "px";
+  divEsquivaEl.style.display = "block";
+  divEsquivaEl.style.width = pegaLargura('#atirar') + "px";
 }
 
 /* vitoria especial ao enfrentar o boss */
 function vitoriaSobBoss(jogador){
   let bolasBoss = document.querySelectorAll('.divsBossDesativada');
   let divAtirarEl = document.querySelector('#atirar');
-  let divBaterEl = document.querySelector('#bater');
-  for(let i = 0; i < bolasBoss.length - 1; i++){
+  for(let i = 0; i < bolasBoss.length; i++){
     divAtirarEl.removeChild(bolasBoss[i]);
   }
-  divBaterEl.removeChild(bolasBoss[bolasBoss.length - 1]);
   jogador.fase = jogador.fase + 1;
   clearInterval(intervalosDoJogo.clearTempo);
   clearInterval(intervalosDoJogo.clearDerrota);
   clearInterval(intervalosDoJogo.clearTempoParado);
   clearInterval(intervalosDoJogo.clearAnimacao);
   document.querySelector('html').removeEventListener('mousemove', verificarMouse);
-  document.querySelector('#atirar').removeEventListener('mousedown', diminuiClicksJogador);
+  divAtirarEl.removeEventListener('mousedown', diminuiClicksJogador);
   salvar(jogador);
   musicaFundoEl.src = "musicas/vitoria.mp3";
   musicaFundoEl.loop = 1;
@@ -419,6 +433,14 @@ function vitoriaSobBoss(jogador){
 function ataqueDoBoss(jogador){
   aumentaDivEsquiva();
   let divEsquivaEl = document.querySelector('#esquiva');
+
+  /* cria a bolinha azul que para o ataque */
+  let acabaAtaque = document.createElement('div');
+  acabaAtaque.id = "acabaAtaque";
+  acabaAtaque.classList.add('danoBoss');
+  divEsquivaEl.appendChild(acabaAtaque);
+  acabaAtaque.style.width = pegaAltura('#acabaAtaque') + "px";
+
   /* cria as bolinhas brancas que causam dano */
   for(let i = 0; i < 25; i++){
     let dano = document.createElement('div');
@@ -429,18 +451,8 @@ function ataqueDoBoss(jogador){
       diminuiVidaJogador(jogador, 2);
     });
   }
-  /* cria a bolinha azul que para o ataque */
-  let acabaAtaque = document.createElement('div');
-  acabaAtaque.id = "acabaAtaque";
-  acabaAtaque.classList.add('danoBoss');
-  divEsquivaEl.appendChild(acabaAtaque);
-  acabaAtaque.style.width = pegaAltura('#acabaAtaque') + "px";
   /* faz as animações das bolinhas */
   intervalosDoJogo.clearAtaque = setInterval(function(){animaAleatorio('.danoBoss', '#esquiva', 0, 0, 0)}, 1000);
-
-  /* não deixa o cara sair da div de esquiva */
-  divEsquivaEl.addEventListener('mouseout', reduzVida);
-  divEsquivaEl.addEventListener('mousemove', paraReduzVida);
 
   /* coloca o envento que para o ataque na bolinha azul */
   acabaAtaque.addEventListener('mouseenter', function(){
@@ -459,24 +471,11 @@ function ataqueDoBoss(jogador){
     divInfEl.style.display = "flex";
     divInfEl.style.opacity = 1;
     clearInterval(intervalosDoJogo.clearAtaque);
-    clearInterval(intervalosDoJogo.clearFuga);
     divEsquivaEl.removeEventListener('mouseout', reduzVida);
     divEsquivaEl.removeEventListener('mousemove', paraReduzVida);
   });
 }
-
-/* os duas abaixo foram colocadas aqui para o removeEventListener funcionar */
-function reduzVida(){
-  intervalosDoJogo.clearFuga = setInterval(function(){
-    diminuiVidaJogador(jogador, 1);
-  }, 1000);
-}
-function paraReduzVida(){
-  clearInterval(intervalosDoJogo.clearFuga);
-}
 /*--------------------funções que montam as fazes do jogo---------------------*/
-/* fala a quantidade maxima de clicks que pode ser dado */
-
 /* fala o maximo de clicks que pode ter em cada fase */
 function defineMaxClick(jogador, x){
   let contadorClicksEl = document.querySelector('#contador-clicks');
@@ -491,8 +490,8 @@ function defineMaxClick(jogador, x){
 }
 
 /* colca A inimigos de qualquer tipo */
-function colocaInimigo(div, classe, img, animacao, a){
-  let divEl = document.querySelector(div);
+function colocaInimigo(classe, img, animacao, a){
+  let divEl = document.querySelector('#atirar');
   for(let i = 0; i < a; i++){
     let inimimgoEl = document.createElement('img');
     inimimgoEl.src = img;
@@ -502,36 +501,6 @@ function colocaInimigo(div, classe, img, animacao, a){
     inimimgoEl.draggable = "false";
     inimimgoEl.style = "user-drag: none; user-select: none -moz-user-select: none; -webkit-user-drag: none; -webkit-user-select: none; -ms-user-select: none;";
     divEl.appendChild(inimimgoEl);
-  }
-}
-
-/* remove todos os inimigos do HTML */
-function removeInimigos(){
-  let alvos = document.querySelectorAll('.morto');
-  let alvosMelee =  document.querySelectorAll('.morto-melee');
-  let divBater = document.querySelector('#bater');
-  let divAtirar = document.querySelector('#atirar');
-
-  for(let alvo of alvos){
-    divAtirar.removeChild(alvo);
-  }
-  for(let alvoMelee of alvosMelee){
-    divBater.removeChild(alvoMelee);
-  }
-}
-
-/* troca a musica e fundo e a imagem */
-function mudaAmbientacao(img, audio){
-  /* muda o fundo */
-  let fundo = document.querySelector('html');
-  fundo.style.backgroundImage = img;
-  fundo.style.backgroundSize = "cover";
-  fundo.style.backgroundRepeat = "no-repeat";
-
-  if(audio !== ""){
-    /* muda a musica de fundo */
-    let musicaFundoEl = document.querySelector('#musica-fundo');
-    musicaFundoEl.src = audio;
   }
 }
 
@@ -545,24 +514,23 @@ function criaFase(fundo, musicaFundo, imgInimigoA, imgInimigoM, a1, a2, a3, a4, 
   jogador.parado = 15;
   salvar(jogador);
   mudaAmbientacao(fundo, musicaFundo);
-  removeInimigos();
-  colocaInimigo('#atirar', 'morto', imgInimigoA, 'linear', a1);
-  colocaInimigo('#atirar', 'morto', imgInimigoA, 'ease-in', a2);
-  colocaInimigo('#atirar', 'morto', imgInimigoA, 'ease-out', a3);
-  colocaInimigo('#atirar', 'morto', imgInimigoA, 'ease-in-out', a4);
-  colocaInimigo('#atirar', 'morto', imgInimigoA, 'dolly', a5);
-  colocaInimigo('#bater', 'morto-melee', imgInimigoM, 'linear', m1);
-  colocaInimigo('#bater', 'morto-melee', imgInimigoM, 'ease-in', m2);
-  colocaInimigo('#bater', 'morto-melee', imgInimigoM, 'ease-out', m3);
-  colocaInimigo('#bater', 'morto-melee', imgInimigoM, 'ease-in-out', m4);
-  colocaInimigo('#bater', 'morto-melee', imgInimigoM, 'dolly', m5);
-  inicializaInimigos((a1+a2+a3+a4+a5), (m1+m2+m3+m4+m5));
-  defineMaxClick(jogador, (a1+a2+a3+a4+a5+5));
+  colocaInimigo('morto', imgInimigoA, 'linear', a1);
+  colocaInimigo('morto', imgInimigoA, 'ease-in', a2);
+  colocaInimigo('morto', imgInimigoA, 'ease-out', a3);
+  colocaInimigo('morto', imgInimigoA, 'ease-in-out', a4);
+  colocaInimigo('morto', imgInimigoA, 'dolly', a5);
+  colocaInimigo('morto', imgInimigoM, 'linear', m1);
+  colocaInimigo('morto', imgInimigoM, 'ease-in', m2);
+  colocaInimigo('morto', imgInimigoM, 'ease-out', m3);
+  colocaInimigo('morto', imgInimigoM, 'ease-in-out', m4);
+  colocaInimigo('morto', imgInimigoM, 'dolly', m5);
+  inicializaInimigos(a1+a2+a3+a4+a5+m1+m2+m3+m4+m5);
+  defineMaxClick(jogador, (a1+a2+a3+a4+a5+m1+m2+m3+m4+m5+9));
   animacao(jogador);
   intervalosDoJogo.clearTempo = setInterval(function(){diminuiTempo(jogador)}, 1000);
   intervalosDoJogo.clearDerrota = setInterval(function(){derrota(jogador)}, 500);
   intervalosDoJogo.clearAnimacao = setInterval(function(){animacao(jogador)}, 1810); /* vai fazer eles mudarem varias vezes e o transition anima*/
-  intervalosDoJogo.clearVitoria = setInterval(function(){vitoria((a1+a2+a3+a4+a5), (m1+m2+m3+m4+m5))}, 1500);
+  intervalosDoJogo.clearVitoria = setInterval(function(){vitoria(a1+a2+a3+a4+a5+m1+m2+m3+m4+m5)}, 1500);
   document.querySelector('html').addEventListener('mousemove', verificarMouse);
   let divAtirarEl = document.querySelector('#atirar');
 

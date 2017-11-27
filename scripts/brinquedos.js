@@ -1,16 +1,3 @@
-var jogador = {
-  fase: 0,
-  personagem: "",
-  arma: "",
-  inimigosMortos: 0,
-  vida: 15,
-  danoBoss: 0,
-  bolasDestuidas: 0,
-  clicks: 100,
-  parado: 15,
-  tempo: 200
-};
-
 function apareceDivModal(texto){
   let descricao = document.createElement('p');
   let divModalEl = document.querySelector('#div-modal');
@@ -29,8 +16,12 @@ let avatares = document.querySelectorAll('.imgs-personagens');
 for(let avatarEl of avatares){
   avatarEl.addEventListener('click', function(e){
     let escolhidoEl = e.currentTarget;
+    for(let avatarElAux of avatares){
+      avatarElAux.classList.remove('escolhida');
+    }
+    escolhidoEl.classList.add('escolhida');
     jogador.personagem = "" + escolhidoEl.src;
-    localStorage.setItem('save', JSON.stringify(jogador));
+    salvar(jogador);
     apareceDivModal("Avatar escolhido. Não se esqueça de escolher o brinquedo.");
   });
 }
@@ -40,15 +31,14 @@ let opcoes = document.querySelectorAll('.opcoes-menu');
 let textos = document.querySelector('.descricoes');
 let mascara = document.querySelector('#mascara');
 
-mascara.addEventListener('click',function(){
-      divEl.classList.remove('aparece');
-      mascara.classList.remove('clicavel');
-});
-
 for(let opcao of opcoes){
   opcao.addEventListener('click', function(e){
       jogador.arma = e.currentTarget.dataset.arma;
-      localStorage.setItem('save', JSON.stringify(jogador));
+      for(let aux of opcoes){
+        aux.style.borderColor = "white";
+      }
+      e.currentTarget.style.borderColor = "green";
+      salvar(jogador);
       if(jogador.arma == "pistola"){
         apareceDivModal("algo mais tradicional . . . muito bem!");
       }
