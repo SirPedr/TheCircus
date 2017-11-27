@@ -13,7 +13,7 @@
   <body>
     <audio id="musica-fundo" src="musicas/criacao-de-level.mp3" autoplay loop="0" ></audio>
     <div id="mascara"></div>
-    <section id="div-modal" >
+    <section id="div-modal">
       <h1>Crie sua propria fase aqui!</h1><br>
       <p>Basta copiar e colar o link de imgs e musicas e escolher a quantidade de inimigos</p>
       <p>O primeiro input é o link para uma imagem que será o inimigo que se deve atirar e os 5 abaixo são 5 tipos de animação para esse inimigo</p>
@@ -40,7 +40,7 @@
             <section  id="tiro">
                   <article class="input-group um-input" >
                           <span class="input-group-addon">Link:</span>
-                          <input type="text" class="urls input-group-addon" id="img-alvo" value="" placeholder="Cole o link de uma imagem para ela ser o inimigo alvo do jogo">
+                          <input type="text" class="urls input-group-addon" id="img-alvo" value="" placeholder="Cole o link de uma imagem para ela ser um tipo inimigo do jogo">
                   </article>
                   <article class="input-group">
                           <span class="input-group-addon">Linear</span>
@@ -66,7 +66,7 @@
             <section  id="bater">
                     <article class="input-group um-input">
                       <span class="input-group-addon">Link:</span>
-                      <input type="text" class="urls input-group-addon" id="img-alvo-melee" value="" placeholder="Cole o link de uma imagem para ela ser o inimigo melee do jogo">
+                      <input type="text" class="urls input-group-addon" id="img-alvo-melee" value="" placeholder="Cole o link de uma imagem para ela ser um segundo tipo de inimigo do jogo">
                     </article>
 
                     <article class="input-group">
@@ -114,6 +114,7 @@
       <span class="jogar-sair" id="jogar"><a href="jogo.html">Jogar</a></span>
     </section>
     <script src="scripts/tudo.js"></script>
+    <script src="scripts/funcoes-essenciais.js"></script>
     <script src="scripts/criar-fase.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>

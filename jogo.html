@@ -11,12 +11,12 @@
   </head>
   <body>
     <audio id="musica-fundo" src="" autoplay loop="0" ></audio>
+    <audio id="efeito-sonoro" src=""></audio>
     <div id="mascara"></div>
     <section id="div-modal" >
       <!-- textos da historia vem aqui -->
     </section>
     <section id="controles">
-      <img id="exclamacao" class="imgs-controles" src="imgs/icones/info.png" draggable="false" style="-webkit-user-select: none; user-select: none; display: none;">
       <img id="som" class="imgs-controles" src="imgs/icones/som.png" draggable="false" style="-webkit-user-select: none; user-select: none;">
     </section>
     <section id="tudo" >
@@ -24,8 +24,6 @@
         </article><article id="atirar">
           <img src="imgs/icones/relogio.png" alt="um relôgio contando o tempo que falta para você acertar os inimigos" id="relogio">
           <span id="tempo">120s</span>
-          <!-- inimigos criados dinamicamente no js -->
-        </article><article id="bater">
           <!-- inimigos criados dinamicamente no js -->
         </article>
       </section>
@@ -53,6 +51,7 @@
     </article>
     <script src="scripts/tudo.js" charset="utf-8"></script>
     <script src="scripts/funcoes-do-jogo.js" charset="utf-8"></script>
+    <script src="scripts/funcoes-essenciais.js"></script>
     <script src="scripts/jogo.js" charset="utf-8"></script>
   </body>
 </html>
